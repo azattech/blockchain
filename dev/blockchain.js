@@ -1,10 +1,10 @@
-const sha256 = require("sha256");
-//import { sha256 } from "js-sha256";
+import sha256 from "sha256";
 
-export class Blockchain {
+class Blockchain {
   constructor() {
     this.chain = [];
     this.pendingTransactions = [];
+    this.createNewBlock(100, "0", "0");
   }
 }
 
@@ -59,4 +59,19 @@ Blockchain.prototype.hashBlock = function (
   return hash;
 };
 
-module.exports = Blockchain;
+Blockchain.prototype.proofOfWork = function (
+  previousBlockHash,
+  currentBlockData
+) {
+  let nonce = 0;
+  let hash = this.hashBlock(previousBlockHash, currentBlockData, nonce);
+
+  while (hash.substring(0, 4) !== "0000") {
+    nonce++;
+    hash = this.hashBlock(previousBlockHash, currentBlockData, nonce);
+    console.log(hash);
+  }
+  return nonce;
+};
+
+export default Blockchain;
