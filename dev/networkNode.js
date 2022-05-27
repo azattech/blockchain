@@ -5,7 +5,7 @@ import { v1 as uuidv1 } from "uuid";
 
 const port = process.argv[2];
 
-import * as rp from "request-promise";
+import rp from "request-promise";
 
 const app = express();
 
