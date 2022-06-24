@@ -1,9 +1,13 @@
 import sha256 from "sha256";
-
 class Blockchain {
   constructor() {
     this.chain = [];
     this.pendingTransactions = [];
+
+    this.currentNodeUrl = currentNodeUrl;
+    this.networkNodes = [];
+
+    this.createNewBlock(100, "0", "0");
   }
 }
 
@@ -40,10 +44,16 @@ Blockchain.prototype.createNewTransaction = function (
     amount: amount,
     sender: sender,
     receipent: receipent,
+    transactionId: uuidv1().split("-").join(""),
   };
 
-  this.pendingTransactions.push(newTransaction);
+  return newTransaction;
+};
 
+Blockchain.prototype.addTransactionToPendingTransactions = function (
+  transactionObj
+) {
+  this.pendingTransactions.push(transactionObj);
   return this.getLastBlock()["index"] + 1;
 };
 
