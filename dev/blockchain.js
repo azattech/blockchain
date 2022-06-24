@@ -1,7 +1,6 @@
-const sha256 = require("sha256");
-//import { sha256 } from "js-sha256";
+import sha256 from "sha256";
 
-export class Blockchain {
+class Blockchain {
   constructor() {
     this.chain = [];
     this.pendingTransactions = [];
@@ -59,4 +58,4 @@ Blockchain.prototype.hashBlock = function (
   return hash;
 };
 
-module.exports = Blockchain;
+export default Blockchain;
